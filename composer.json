@@ -6,6 +6,10 @@
         {
             "name": "Marcin Gierus",
             "email": "martin@lcbrq.com"
+        },
+        {
+            "name": "Tomasz Gregorczyk",
+            "email": "tom@lcbrq.com"
         }
     ],
     "require": {}

@@ -52,5 +52,46 @@ class LCB_Attributes_Helper_Data extends Mage_Core_Helper_Abstract
             return false;
         }
     }
+    
+    /**
+     * Remove unused product attribute values
+     * 
+     * @author Tomasz Silpion Gregorczyk <tom@lcbrq.com>
+     * @param int $limit
+     * @return void
+     */
+    public function removeUnusedAttributes(int $limit = null)
+    {
+
+        $attributes = Mage::getResourceModel('catalog/product_attribute_collection');
+        $products = Mage::getModel('catalog/product')->getCollection()
+                ->addAttributeToFilter('status', array('eq' => Mage_Catalog_Model_Product_Status::STATUS_ENABLED));
+        $config = Mage::getModel('eav/config');
+
+        if ($limit) {
+            $products->getSelect()->limit($limit);
+        }
+
+        foreach ($products as $product) {
+
+            $resource = Mage::getSingleton('catalog/product')->getResource();
+
+            foreach ($attributes as $attribute) {
+                /** @var Mage_Catalog_Model_Resource_Eav_Attribute $attribute */
+                $code = $attribute->getAttributeCode();
+
+                $assignations = $config->getEntityAttributeCodes(
+                        Mage_Catalog_Model_Product::ENTITY, $product
+                );
+
+                if (!in_array($code, $assignations)) {
+                    $value = $resource->getAttributeRawValue($product->getId(), $code, Mage::app()->getStore());
+                    $product->setData($code, false);
+                    $resource->saveAttribute($product, $code);
+                }
+            }
+        }
+    }
+
 }
 	 

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <LCB_Attributes>
+      <version>0.1.0</version>
+    </LCB_Attributes>
+  </modules>
+  <global>
+    <helpers>
+      <attributes>
+        <class>LCB_Attributes_Helper</class>
+      </attributes>
+    </helpers>
+  </global>
+</config> 

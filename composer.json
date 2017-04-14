@@ -1,0 +1,12 @@
+{
+    "name": "lcb/attributes",
+    "type": "magento-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Gierus",
+            "email": "martin@lcbrq.com"
+        }
+    ],
+    "require": {}
+}
